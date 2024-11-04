@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facebook Browser Detection</title>
+    <title>Real-Time Browser Detection</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
@@ -27,28 +28,30 @@
     </style>
 </head>
 <body>
-    <div id="message"></div>
+    <div id="message">Loading...</div>
     <div id="userAgent"></div>
 
     <script>
-        function isFacebookBrowser() {
-            var ua = navigator.userAgent || navigator.vendor || window.opera;
-            return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+        function detectFacebookBrowser() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            return /FBAN|FBAV/.test(userAgent);
         }
 
-        window.onload = function() {
+        function displayBrowserInfo() {
             var messageDiv = document.getElementById('message');
             var userAgentDiv = document.getElementById('userAgent');
-            var ua = navigator.userAgent;
+            var userAgent = navigator.userAgent;
 
-            if (isFacebookBrowser()) {
+            if (detectFacebookBrowser()) {
                 messageDiv.textContent = "You are using Facebook's in-app browser.";
             } else {
                 messageDiv.textContent = "You are not using Facebook's in-app browser.";
             }
 
-            userAgentDiv.textContent = "User Agent: " + ua;
-        };
+            userAgentDiv.textContent = "User Agent: " + userAgent;
+        }
+
+        window.onload = displayBrowserInfo;
     </script>
 </body>
 </html>
