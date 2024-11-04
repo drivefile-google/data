@@ -12,15 +12,23 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            text-align: center;
         }
         #message {
             font-size: 24px;
             color: #333;
         }
+        #userAgent {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #666;
+            word-break: break-all;
+        }
     </style>
 </head>
 <body>
     <div id="message"></div>
+    <div id="userAgent"></div>
 
     <script>
         function isFacebookBrowser() {
@@ -30,11 +38,16 @@
 
         window.onload = function() {
             var messageDiv = document.getElementById('message');
+            var userAgentDiv = document.getElementById('userAgent');
+            var ua = navigator.userAgent;
+
             if (isFacebookBrowser()) {
-                messageDiv.textContent = "FB_IAB/FB4A;FBAV/481.1.0.74.109";
+                messageDiv.textContent = "You are using Facebook's in-app browser.";
             } else {
-                messageDiv.textContent = "This page is not opened in a Facebook browser.";
+                messageDiv.textContent = "You are not using Facebook's in-app browser.";
             }
+
+            userAgentDiv.textContent = "User Agent: " + ua;
         };
     </script>
 </body>
