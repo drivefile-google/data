@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook Browser Detection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #message {
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div id="message"></div>
+
+    <script>
+        function isFacebookBrowser() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            return (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1);
+        }
+
+        window.onload = function() {
+            var messageDiv = document.getElementById('message');
+            if (isFacebookBrowser()) {
+                messageDiv.textContent = "FB_IAB/FB4A;FBAV/481.1.0.74.109";
+            } else {
+                messageDiv.textContent = "This page is not opened in a Facebook browser.";
+            }
+        };
+    </script>
+</body>
+</html>
